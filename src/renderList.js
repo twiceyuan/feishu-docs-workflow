@@ -53,7 +53,7 @@ async function getStarList(keyword = '') {
   return Object.values(docs).map((doc) => buildDocItemArg({
     title: util.removeHtmlTag(doc.name),
     subtitle: editInfo(users[doc.edit_uid].cn_name, doc.edit_time),
-    arg: doc.url,
+    arg: doc.url || doc.wiki_infos[0].wiki_url,
     icon: {
       path: iconPath,
     },
@@ -92,7 +92,7 @@ async function search(query) {
   return Object.values(docs).sort(compareSearchItem).map((doc) => buildDocItemArg({
     title: util.removeHtmlTag(doc.title),
     subtitle: editInfo(doc.edit_name, doc.edit_time),
-    arg: doc.url,
+    arg: doc.url || doc.wiki_infos[0].wiki_url,
     icon: {
       path: iconPath,
     },
@@ -108,7 +108,7 @@ async function getRecentList() {
   return Object.values(docs).sort(compareOpenTime).map((doc) => buildDocItemArg({
     title: util.removeHtmlTag(doc.name),
     subtitle: editInfo(users[doc.edit_uid].cn_name, doc.edit_time),
-    arg: doc.url,
+    arg: doc.url || doc.wiki_infos[0].wiki_url,
     icon: {
       path: iconPath,
     },
